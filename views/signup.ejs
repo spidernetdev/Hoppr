@@ -4,144 +4,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIGN UP</title>
+    <title>Sign Up | URL Shortener</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        /* Animated Gradient Background */
-        body {
+        :root {
+            --background: #f8fafb;
+            --surface: #ffffff;
+            --primary: #0d9488; /* Teal */
+            --accent: #fb923c;  /* Peach */
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --border: #e2e8f0;
+            --error: #ef4444;
+        }
+
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text-main);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-
-            background: linear-gradient(45deg, #6a11cb, #2575fc, #ff7eb3, #ff758c);
-            background-size: 300% 300%;
-            animation: gradientMove 12s ease infinite;
         }
 
-        @keyframes gradientMove {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Center Container */
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .login-container {
             width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            animation: fadeIn 0.8s ease-out;
         }
 
-        /* Glassmorphism Card */
-        .glass-card {
-            width: 350px;
-            padding: 30px;
-            border-radius: 20px;
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px 40px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
 
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+        h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-align: center;
+            letter-spacing: -0.02em;
+            color: var(--primary);
+        }
 
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
-            animation: fadeIn 1s ease;
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-sub);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #f8fafb;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 15px;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        input:focus {
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 12px;
+            background: var(--primary);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background: #0f766e;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .footer-links {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-sub);
+        }
+
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #f97316;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 40px 24px;
             }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Improved Title */
-        .title {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-            margin-bottom: 20px;
-        }
-
-        /* Inputs */
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 10px;
-            border: none;
-
-            background: rgba(255, 255, 255, 0.25);
-            color: white;
-            outline: none;
-            font-size: 15px;
-
-            backdrop-filter: blur(4px);
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Button */
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-
-            background: rgba(255, 255, 255, 0.8);
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: white;
-            transform: translateY(-2px);
         }
     </style>
 </head>
 
 <body>
-
-    <div class="container">
-        <div class="glass-card">
-
-            <h1 class="title">Create Your Account</h1>
+    <div class="login-container">
+        <div class="card">
+            <h1>Create Account</h1>
+            <p class="subtitle">Join and start shortening your links today.</p>
 
             <form action="/user" method="POST">
-                <input type="text" required name="name" placeholder="Full Name">
-                <input type="email" required name="email" placeholder="Email Address">
-                <input type="password" required name="password" placeholder="Password">
-
-                <button type="submit">Sign Up</button>
-                
-
-                <a href="/login" class="login-link">Already have an account?</a>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="name@company.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-submit">Sign Up</button>
             </form>
 
+            <div class="footer-links">
+                Already have an account? <a href="/login">Sign in</a>
+            </div>
         </div>
     </div>
-
 </body>
 
 </html>

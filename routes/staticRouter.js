@@ -12,6 +12,9 @@ router.get('/admin/urls' , restrictTo(["ADMIN"]) ,async(req,res) =>{
 
 
 router.get('/',restrictTo(["NORMAL","ADMIN"]),async(req,res) =>{
+    if (!req.user) {
+    return res.redirect("/login"); // 🔥 IMPORTANT
+  }
     const allurls = await URL.find({ createdBy : req.user._id})
     res.render("home" , {
         urls :allurls    // to show all urls on the home page when we visit '/'

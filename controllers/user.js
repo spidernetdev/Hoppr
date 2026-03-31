@@ -22,8 +22,11 @@ async function handleUserLogin (req, res){
 }
 
 async function handleUserLogout(req, res) {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+  httpOnly: true,
+  secure: true,
+});
     return res.redirect("/login");
 }
 
-export { handleUserSignup, handleUserLogin, handleUserLogout };
+export { handleUserSignup, handleUserLogin, handleUserLogout };
