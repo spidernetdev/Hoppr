@@ -26,7 +26,7 @@ A high-performance, minimalist URL shortening service built with Node.js, Expres
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/url-shortener.git
+git clone https://github.com/yourusername/Hopper.git
 cd hoppr
 ```
 
@@ -45,10 +45,6 @@ SECRET_KEY=your_jwt_secret_key
 
 ### 4. Run the application
 ```bash
-# Development mode
-npm run dev
-
-# Production mode
 npm start
 ```
 
