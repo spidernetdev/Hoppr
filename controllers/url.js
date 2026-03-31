@@ -26,7 +26,15 @@ async function handleGetAnalytics(req,res) {
 }
 
 
+async function handleDeleteUrl(req, res) {
+    const shortId = req.params.shortid;
+    await URL.findOneAndDelete({ shortId: shortId, createdBy: req.user._id });
+    return res.redirect("/");
+}
+
+
 export {
     handleGenerateNewShortUrl,
     handleGetAnalytics,
-}
+    handleDeleteUrl
+}

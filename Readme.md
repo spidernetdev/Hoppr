@@ -2,7 +2,7 @@
 
 A high-performance, minimalist URL shortening service built with Node.js, Express, and MongoDB. Featuring a sleek teal-and-peach aesthetic, robust authentication, and real-time click tracking.
 
-![Modern Dashboard](https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2070&h=600)
+![Modern Dashboard](./assets/dashboard.png)
 
 ## ✨ Features
 
