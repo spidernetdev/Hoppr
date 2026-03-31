@@ -26,7 +26,7 @@ A high-performance, minimalist URL shortening service built with Node.js, Expres
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/Hopper.git
+git clone https://github.com/yourusername/Hoppr.git
 cd hoppr
 ```
 
