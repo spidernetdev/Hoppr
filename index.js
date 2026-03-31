@@ -14,6 +14,18 @@ import userRoute from "./routes/user.js"
 
 
 connectMongoDb(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("MongoDB connected");
+
+    app.listen(process.env.PORT || 3000, () => {
+      console.log("server started");
+    });
+  })
+  .catch((err) => {
+    console.error("MongoDB connection failed:", err);
+  });
+
+
 
 const app = express()
 
@@ -48,6 +60,3 @@ app.get('/url/:shortid', async (req,res) =>{
     res.redirect(entry.redirectUrl)
 }) 
 
-app.listen(process.env.PORT , ()=>{
-    console.log("server started")
-})
