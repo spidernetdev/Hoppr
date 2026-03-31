@@ -12,12 +12,10 @@ async function handleGenerateNewShortUrl(req, res) {
         visitHistory : [],
         createdBy :req.user._id,
     })
-    const urls = await URL.find({createdBy : req.user._id});
-    res.render("home" , {         //to render on home page
-    id : shortId,                  // used in home.ejs as locals.id
-    urls: urls                    // used to show all urls on the home page after creating a new short url
-})
+    return res.redirect("/?id=" + shortId);
 }
+
+
 
 async function handleGetAnalytics(req,res) {
     const shortId = req.params.shortid;
@@ -28,6 +26,10 @@ async function handleGetAnalytics(req,res) {
 
 async function handleDeleteUrl(req, res) {
     const shortId = req.params.shortid;
+    if (req.user.role === "ADMIN") {
+        await URL.findOneAndDelete({ shortId: shortId });
+        return res.redirect("/admin/urls");
+    }
     await URL.findOneAndDelete({ shortId: shortId, createdBy: req.user._id });
     return res.redirect("/");
 }

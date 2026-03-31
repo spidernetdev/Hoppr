@@ -246,6 +246,24 @@
         border-color: #fecaca;
       }
 
+      .user-badge {
+        font-size: 11px;
+        background: #f1f5f9;
+        color: var(--text-sub);
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-weight: 600;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .user-badge:hover {
+        background: #e2e8f0;
+        color: var(--primary);
+        border-color: var(--primary);
+      }
+
       .redirect-link {
         color: var(--primary);
         text-decoration: none;
@@ -330,6 +348,9 @@
             <tr>
               <th>S NO</th>
               <th>SHORT ID</th>
+              <% if (locals.user && user.role === 'ADMIN') { %>
+                <th>CREATED BY</th>
+              <% } %>
               <th>REDIRECT URL</th>
               <th>CLICKS</th>
               <th>ACTION</th>
@@ -343,12 +364,22 @@
                   <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
                     <span class="short-id"><%= url.shortId %></span>
                     <button class="btn-copy" 
-                            data-url="https://url-shortner-41ml.onrender.com/url/<%= url.shortId %>"
+                            data-url="https://hoppr-ok2o.onrender.com/url/<%= url.shortId %>"
                             onclick="copyFromAttribute(this)">
                       Copy
                     </button>
                   </div>
                 </td>
+                <% if (locals.user && user.role === 'ADMIN') { %>
+                  <td data-label="CREATED BY">
+                    <span class="user-badge" 
+                          title="Click to copy email"
+                          data-url="<%= url.createdBy ? url.createdBy.email : '' %>"
+                          onclick="copyEmail(this)">
+                      <%= url.createdBy ? (url.createdBy.name || url.createdBy.email) : 'System' %>
+                    </span>
+                  </td>
+                <% } %>
                 <td data-label="REDIRECT URL">
                   <a href="<%= url.redirectUrl %>" target="_blank" class="redirect-link">
                     <span class="full-url"><%= url.redirectUrl %></span>
@@ -378,6 +409,21 @@
   </div>
 
   <script>
+    function copyEmail(btn) {
+      const email = btn.getAttribute('data-url');
+      if (!email) return;
+      navigator.clipboard.writeText(email).then(() => {
+        const originalText = btn.innerText;
+        btn.innerText = 'Email Copied!';
+        btn.style.color = 'var(--primary)';
+        
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.style.color = '';
+        }, 1500);
+      });
+    }
+
     function copyFromAttribute(btn) {
       const urlText = btn.getAttribute('data-url');
       navigator.clipboard.writeText(urlText).then(() => {

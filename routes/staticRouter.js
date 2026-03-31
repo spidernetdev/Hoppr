@@ -4,22 +4,35 @@ import { restrictTo } from '../middleware/auth.js';
 const router = express.Router();
 
 router.get('/admin/urls' , restrictTo(["ADMIN"]) ,async(req,res) =>{
-    const allurls = await URL.find({})
+    const allurls = await URL.find({}).populate("createdBy")
     res.render("home" , {
-        urls :allurls    
+        urls :allurls,
+        user: req.user
     })
 }) 
 
 
 router.get('/',restrictTo(["NORMAL","ADMIN"]),async(req,res) =>{
-    if (!req.user) {
-    return res.redirect("/login"); // 🔥 IMPORTANT
-  }
-    const allurls = await URL.find({ createdBy : req.user._id})
+    if (!req.user) return res.redirect("/login");
+
+    const query = req.user.role === "ADMIN" ? {} : { createdBy: req.user._id };
+    let allurls = await URL.find(query).populate("createdBy");
+
+    if (req.user.role === "ADMIN") {
+        allurls.sort((a, b) => {
+            const nameA = (a.createdBy?.name || a.createdBy?.email || "").toLowerCase();
+            const nameB = (b.createdBy?.name || b.createdBy?.email || "").toLowerCase();
+            return nameA.localeCompare(nameB);
+        });
+    }
+
     res.render("home" , {
-        urls :allurls    // to show all urls on the home page when we visit '/'
+        urls :allurls,
+        user: req.user,
+        id: req.query.id // 🔥 Get ID from query after redirect
     })
 })
+
 
 router.get("/signup" , (req,res) => {
     res.render("signup")
