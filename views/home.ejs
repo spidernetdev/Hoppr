@@ -229,6 +229,25 @@
         font-size: 12px;
         font-weight: 700;
       }
+
+      .redirect-link {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .redirect-link:hover {
+        text-decoration: underline;
+      }
+
+      @media (min-width: 768px) {
+        .domain-only { display: none; }
+      }
+
+      @media (max-width: 767px) {
+        .full-url { display: none; }
+        .domain-only { display: inline; }
+      }
     
       @media (max-width: 640px) {
         .input-group {
@@ -313,7 +332,18 @@
                     </button>
                   </div>
                 </td>
-                <td data-label="REDIRECT URL"><%= url.redirectUrl %></td>
+                <td data-label="REDIRECT URL">
+                  <a href="<%= url.redirectUrl %>" target="_blank" class="redirect-link">
+                    <span class="full-url"><%= url.redirectUrl %></span>
+                    <% 
+                      let domain = url.redirectUrl;
+                      try { 
+                        domain = new URL(url.redirectUrl).hostname;
+                      } catch(e) {} 
+                    %>
+                    <span class="domain-only"><%= domain %></span>
+                  </a>
+                </td>
                 <td data-label="CLICKS"><span class="clicks-badge"><%= url.visitHistory.length %></span></td>
               </tr>
             <% }) %>
